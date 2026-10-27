@@ -164,3 +164,22 @@ a:focus-visible {
         padding: 2rem 1.25rem;
     }
 }
+
+.organization-image {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.card {
+    overflow: hidden;
+}
+
+@media (max-width: 600px) {
+    .organization-image {
+        height: 200px;
+    }
+}
