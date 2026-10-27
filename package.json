@@ -1,0 +1,25 @@
+{
+  "name": "cse340-course-repo",
+  "version": "1.0.0",
+  "description": "CSE 340 course assignments and projects",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sayhitoritu/cse340-course-repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/sayhitoritu/cse340-course-repo/issues"
+  },
+  "homepage": "https://github.com/sayhitoritu/cse340-course-repo#readme",
+  "dependencies": {
+    "ejs": "^7.0.2",
+    "express": "^5.3.0"
+  }
+}
