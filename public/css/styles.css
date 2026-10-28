@@ -183,3 +183,14 @@ a:focus-visible {
         height: 200px;
     }
 }
+
+
+.home-image {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 24px auto 0;
+}
