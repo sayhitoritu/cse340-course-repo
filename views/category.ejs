@@ -1,0 +1,33 @@
+<%- include('partials/header', { title: title }) %>
+
+    <section class="page-heading">
+        <p class="eyebrow">Explore opportunities</p>
+        <h1>
+            <%= category.name %>
+        </h1>
+        <p>Discover service projects in this category.</p>
+    </section>
+
+    <section class="card-grid">
+        <% if (projects.length> 0) { %>
+            <% projects.forEach((project)=> { %>
+                <article class="card">
+                    <h2>
+                        <a href="/project/<%= project.project_id %>">
+                            <%= project.name %>
+                        </a>
+                    </h2>
+                    <p>
+                        <%= project.description %>
+                    </p>
+                    <p>
+                        <%= project.location %>
+                    </p>
+                </article>
+                <% }) %>
+                    <% } else { %>
+                        <p>No projects found in this category.</p>
+                        <% } %>
+    </section>
+
+    <%- include('partials/footer') %>

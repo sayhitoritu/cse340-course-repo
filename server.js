@@ -1,14 +1,14 @@
 
 import express from "express";
-
 import path from "path";
 import { fileURLToPath } from "url";
 
 import "dotenv/config";
 import pool from "./src/database/index.js";
-import { getAllCategories } from "./src/models/categories.js";
-import { getAllOrganizations } from "./src/models/organizations.js";
-import { getAllProjects } from "./src/models/projects.js";
+
+import categoriesRoute from "./src/routes/categoriesRoute.js";
+import organizationsRoute from "./src/routes/organizationsRoute.js";
+import projectsRoute from "./src/routes/projectsRoute.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,68 +24,35 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
     res.render("index", { title: "Home" });
 });
+app.use((req, res, next) => {
+    console.log("REQUEST RECEIVED:", req.method, req.url);
+    next();
+});
+// Organization routes
+app.use("/organizations", organizationsRoute);
+app.use("/organization", organizationsRoute);
 
-app.get("/organizations", async (req, res) => {
-    try {
-        const organizations = await getAllOrganizations();
+// Project routes
+app.use("/projects", projectsRoute);
+app.use("/project", projectsRoute);
 
-        console.log("Organizations retrieved:", organizations);
+// Category routes
+app.use("/categories", categoriesRoute);
+app.use("/category", categoriesRoute);
 
-        res.render("organizations", {
-            title: "Organizations",
-            organizations: organizations
-        });
-
-    } catch (error) {
-        console.error("Error loading organizations:", error);
-        res.status(500).send("Unable to load organizations");
-    }
+// 404 handler
+app.use((req, res) => {
+    res.status(404).send("Page not found");
 });
 
-app.get("/projects", async (req, res) => {
-    try {
-        const projects = await getAllProjects();
+// Database connection test
+console.log("Starting Express server...");
 
-        console.log("Projects sent to EJS:", projects);
-
-        res.render("projects", {
-            title: "Service Projects",
-            projects: projects
-        });
-
-    } catch (error) {
-        console.error("Error loading projects:", error);
-        res.status(500).send("Unable to load projects");
-    }
+const server = app.listen(3000, "127.0.0.1", () => {
+    console.log("SUCCESS: Express is listening!");
+    console.log(server.address());
 });
 
-app.get("/categories", async (req, res) => {
-    try {
-        const categories = await getAllCategories();
-        console.log("Number of categories:", categories.length);
-
-        console.log("Categories retrieved:", categories);
-
-        res.render("categories", {
-            title: "Service Project Categories",
-            categories: categories
-        });
-
-    } catch (error) {
-        console.error("Error loading categories:", error);
-        res.status(500).send("Unable to load categories");
-    }
-});
-
-pool.query("SELECT NOW()")
-    .then((result) => {
-        console.log("Database connected successfully!");
-        console.log(result.rows[0]);
-    })
-    .catch((error) => {
-        console.error("Database connection failed:", error);
-    });
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+server.on("error", (error) => {
+    console.error("SERVER ERROR:", error);
 });
