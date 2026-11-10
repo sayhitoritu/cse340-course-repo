@@ -45,14 +45,10 @@ app.use((req, res) => {
     res.status(404).send("Page not found");
 });
 
-// Database connection test
-console.log("Starting Express server...");
 
-const server = app.listen(3000, "127.0.0.1", () => {
-    console.log("SUCCESS: Express is listening!");
-    console.log(server.address());
-});
+// Start Express server
 
-server.on("error", (error) => {
-    console.error("SERVER ERROR:", error);
+
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Server running on port ${port}`);
 });
