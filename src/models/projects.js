@@ -1,10 +1,12 @@
 
+
 import pool from "../database/index.js";
 
 const getAllProjects = async () => {
     const sql = `
         SELECT
             projects.project_id,
+            projects.organization_id,
             projects.name,
             projects.description,
             projects.location,
@@ -18,16 +20,15 @@ const getAllProjects = async () => {
             ON projects.project_id = project_categories.project_id
         LEFT JOIN categories
             ON project_categories.category_id = categories.category_id
-        WHERE projects.project_date >= CURRENT_DATE
         GROUP BY
             projects.project_id,
+            projects.organization_id,
             projects.name,
             projects.description,
             projects.location,
             projects.project_date,
             organizations.name
-        ORDER BY projects.project_date
-        LIMIT 5;
+        ORDER BY projects.project_date;
     `;
 
     const result = await pool.query(sql);
@@ -92,4 +93,3 @@ export {
     getProjectsByCategoryId,
     getProjectsByOrganizationId
 };
-
