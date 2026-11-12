@@ -28,6 +28,8 @@ app.use((req, res, next) => {
     console.log("REQUEST RECEIVED:", req.method, req.url);
     next();
 });
+
+
 // Organization routes
 app.use("/organizations", organizationsRoute);
 app.use("/organization", organizationsRoute);
@@ -40,10 +42,27 @@ app.use("/project", projectsRoute);
 app.use("/categories", categoriesRoute);
 app.use("/category", categoriesRoute);
 
+
 // 404 handler
-app.use((req, res) => {
-    res.status(404).send("Page not found");
+app.use((req, res, next) => {
+    const error = new Error("Page not found");
+    error.status = 404;
+    next(error);
 });
+
+// Global error handler (404 and 500)
+app.use((err, req, res, next) => {
+    const status = err.status || err.statusCode || 500;
+
+    res.status(status).render("error", {
+        title: status === 404 ? "Page Not Found" : "Server Error",
+        code: status,
+        message: status === 404
+            ? "Sorry, the page you are looking for does not exist."
+            : "Something went wrong. Please try again later."
+    });
+});
+
 
 
 // Start Express server

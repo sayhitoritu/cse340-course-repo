@@ -1,4 +1,5 @@
 
+
 import {
     getAllProjects,
     getProjectById
@@ -6,7 +7,7 @@ import {
 
 import { getCategoriesByProjectId } from "../models/categories.js";
 
-const buildProjects = async (req, res) => {
+const buildProjects = async (req, res, next) => {
     try {
         const projects = await getAllProjects();
 
@@ -16,22 +17,26 @@ const buildProjects = async (req, res) => {
         });
     } catch (error) {
         console.error("Error loading projects:", error);
-        res.status(500).send("Unable to load projects");
+        next(error);
     }
 };
 
-const buildProjectById = async (req, res) => {
+const buildProjectById = async (req, res, next) => {
     try {
         const projectId = Number(req.params.id);
 
         if (!Number.isInteger(projectId) || projectId <= 0) {
-            return res.status(404).send("Project not found");
+            const error = new Error("Project not found");
+            error.status = 404;
+            return next(error);
         }
 
         const project = await getProjectById(projectId);
 
         if (!project) {
-            return res.status(404).send("Project not found");
+            const error = new Error("Project not found");
+            error.status = 404;
+            return next(error);
         }
 
         const categories = await getCategoriesByProjectId(projectId);
@@ -43,7 +48,7 @@ const buildProjectById = async (req, res) => {
         });
     } catch (error) {
         console.error("Error loading project details:", error);
-        res.status(500).send("Unable to load project details");
+        next(error);
     }
 };
 
@@ -51,3 +56,4 @@ export {
     buildProjects,
     buildProjectById
 };
+

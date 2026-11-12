@@ -2,21 +2,29 @@
 
     <section class="page-heading">
         <p class="eyebrow">Our community partners</p>
+
         <h1>
             <%= organization.name %>
         </h1>
+
         <p>
             <%= organization.description %>
         </p>
-        <p>Contact: <%= organization.contact_email %>
+
+        <p>
+            <strong>Contact:</strong>
+            <a href="mailto:<%= organization.contact_email %>">
+                <%= organization.contact_email %>
+            </a>
         </p>
     </section>
 
-    <section class="content-section">
-        <h2>Service Projects</h2>
+    <section class="content-section" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Service Projects</h2>
 
         <div class="card-grid">
             <% if (projects.length> 0) { %>
+
                 <% projects.forEach((project)=> { %>
                     <article class="card">
                         <h3>
@@ -24,14 +32,18 @@
                                 <%= project.name %>
                             </a>
                         </h3>
+
                         <p>
                             <%= project.description %>
                         </p>
+
                         <p>
-                            <%= project.location %>
+                            <strong>Location:</strong>
+                            <%= project.location || "Location not specified" %>
                         </p>
                     </article>
                     <% }) %>
+
                         <% } else { %>
                             <p>No projects available for this organization.</p>
                             <% } %>

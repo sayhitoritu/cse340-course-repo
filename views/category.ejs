@@ -2,14 +2,17 @@
 
     <section class="page-heading">
         <p class="eyebrow">Explore opportunities</p>
+
         <h1>
             <%= category.name %>
         </h1>
+
         <p>Discover service projects in this category.</p>
     </section>
 
-    <section class="card-grid">
+    <section class="card-grid" aria-label="Projects in this category">
         <% if (projects.length> 0) { %>
+
             <% projects.forEach((project)=> { %>
                 <article class="card">
                     <h2>
@@ -17,14 +20,18 @@
                             <%= project.name %>
                         </a>
                     </h2>
+
                     <p>
                         <%= project.description %>
                     </p>
+
                     <p>
-                        <%= project.location %>
+                        <strong>Location:</strong>
+                        <%= project.location || "Location not specified" %>
                     </p>
                 </article>
                 <% }) %>
+
                     <% } else { %>
                         <p>No projects found in this category.</p>
                         <% } %>

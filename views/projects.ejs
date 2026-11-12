@@ -6,11 +6,12 @@
         <p>Explore upcoming opportunities to serve your community.</p>
     </section>
 
-    <section class="content-section">
-        <h2>Upcoming Service Projects</h2>
+    <section class="content-section" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Upcoming Service Projects</h2>
 
         <div class="card-grid">
             <% if (projects.length> 0) { %>
+
                 <% projects.forEach((project)=> { %>
                     <article class="card">
                         <h3>
@@ -32,16 +33,17 @@
 
                         <p>
                             <strong>Location:</strong>
-                            <%= project.location || 'To be announced' %>
+                            <%= project.location || "To be announced" %>
                         </p>
 
                         <p>
                             <strong>Date:</strong>
                             <%= project.project_date ? new Date(project.project_date).toLocaleDateString()
-                                : 'To be announced' %>
+                                : "To be announced" %>
                         </p>
                     </article>
                     <% }) %>
+
                         <% } else { %>
                             <p>No upcoming projects are available right now.</p>
                             <% } %>

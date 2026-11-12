@@ -8,11 +8,11 @@
         <p>Discover organizations working to make our communities stronger.</p>
     </section>
 
-    <section class="card-grid">
+    <section class="card-grid" aria-label="List of organizations">
         <% organizations.forEach((organization)=> { %>
             <article class="card">
                 <% if (organization.image) { %>
-                    <img src="/images/<%= organization.image %>" alt="<%= organization.name %>"
+                    <img src="/images/<%= organization.image %>" alt="Organization: <%= organization.name %>"
                         class="organization-image">
                     <% } %>
 
@@ -21,6 +21,7 @@
                                 <%= organization.name %>
                             </a>
                         </h2>
+
                         <p>
                             <%= organization.description %>
                         </p>
