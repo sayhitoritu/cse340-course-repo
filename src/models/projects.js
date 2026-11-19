@@ -87,9 +87,85 @@ const getProjectsByOrganizationId = async (organizationId) => {
     return result.rows;
 };
 
+
+const createProject = async (
+    title,
+    description,
+    location,
+    date,
+    organizationId
+) => {
+    const sql = `
+        INSERT INTO projects (
+            name,
+            description,
+            location,
+            project_date,
+            organization_id
+        )
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING project_id;
+    `;
+
+    const result = await pool.query(sql, [
+        title,
+        description,
+        location,
+        date,
+        organizationId
+    ]);
+
+    if (result.rows.length === 0) {
+        throw new Error("Failed to create project");
+    }
+
+    return result.rows[0].project_id;
+};
+
+
+const updateProject = async (
+    projectId,
+    title,
+    description,
+    location,
+    date,
+    organizationId
+) => {
+    const sql = `
+        UPDATE projects
+        SET
+            name = $1,
+            description = $2,
+            location = $3,
+            project_date = $4,
+            organization_id = $5
+        WHERE project_id = $6
+        RETURNING project_id;
+    `;
+
+    const result = await pool.query(sql, [
+        title,
+        description,
+        location,
+        date,
+        organizationId,
+        projectId
+    ]);
+
+    if (result.rows.length === 0) {
+        throw new Error("Project not found");
+    }
+
+    return result.rows[0].project_id;
+};
+
+
+
 export {
     getAllProjects,
     getProjectById,
     getProjectsByCategoryId,
-    getProjectsByOrganizationId
+    getProjectsByOrganizationId,
+    createProject,
+    updateProject
 };

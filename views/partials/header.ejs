@@ -14,6 +14,7 @@
 <body>
     <header class="site-header">
         <a class="brand" href="/" aria-label="Service Network home">Service Network</a>
+
         <nav class="site-nav" aria-label="Main navigation">
             <a href="/">Home</a>
             <a href="/organizations">Organizations</a>
@@ -21,4 +22,19 @@
             <a href="/categories">Categories</a>
         </nav>
     </header>
+
     <main class="container">
+
+        <% const messages=flash(); %>
+
+            <% Object.keys(messages).forEach(type=> { %>
+                <% if (messages[type].length> 0) { %>
+                    <div class="alert <%= type %>" role="alert">
+                        <% messages[type].forEach(msg=> { %>
+                            <p>
+                                <%= msg %>
+                            </p>
+                            <% }); %>
+                    </div>
+                    <% } %>
+                        <% }); %>

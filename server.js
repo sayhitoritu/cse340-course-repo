@@ -1,17 +1,20 @@
-
+import flash from "./src/middleware/flash.js";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import session from "express-session";
 
 import "dotenv/config";
-import pool from "./src/database/index.js";
+
 
 import categoriesRoute from "./src/routes/categoriesRoute.js";
 import organizationsRoute from "./src/routes/organizationsRoute.js";
 import projectsRoute from "./src/routes/projectsRoute.js";
+import organizationFormsRoute from "./src/routes/organizationFormsRoute.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,6 +22,22 @@ const __dirname = path.dirname(__filename);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Set up session management
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }
+}));
+
+// Use flash message middleware
+app.use(flash);
+
+// Allow Express to receive and process form data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Serve static files
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
@@ -29,6 +48,8 @@ app.use((req, res, next) => {
     next();
 });
 
+// New organization form routes
+app.use("/", organizationFormsRoute);
 
 // Organization routes
 app.use("/organizations", organizationsRoute);
@@ -42,6 +63,8 @@ app.use("/project", projectsRoute);
 app.use("/categories", categoriesRoute);
 app.use("/category", categoriesRoute);
 
+// Exact category creation and editing routes
+app.use("/", categoriesRoute);
 
 // 404 handler
 app.use((req, res, next) => {

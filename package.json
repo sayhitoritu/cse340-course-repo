@@ -7,13 +7,16 @@
     "start": "node server.js"
   },
   "repository": {
-    "type": "git",  
+    "type": "git",
     "url": "git+https://github.com/sayhitoritu/cse340-course-repo.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "bugs": {
     "url": "https://github.com/sayhitoritu/cse340-course-repo/issues"
   },
@@ -22,6 +25,8 @@
     "dotenv": "^18.0.9",
     "ejs": "^7.0.2",
     "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
     "pg": "^8.23.1"
   }
 }

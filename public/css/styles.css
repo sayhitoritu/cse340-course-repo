@@ -226,3 +226,97 @@ textarea:focus-visible {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* Flash message styles */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert.warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert.info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+
+/* Category and general form styling */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #173b57;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #b8c6d6;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    color: #243247;
+    font: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #176b68;
+}
+
+.card form button {
+    padding: 0.75rem 1.2rem;
+    border: 2px solid #176b68;
+    border-radius: 0.5rem;
+    background: #176b68;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.card form button:hover {
+    background: #104e4c;
+    border-color: #104e4c;
+}
+
+.card form fieldset {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    border: 1px solid #b8c6d6;
+    border-radius: 0.5rem;
+}
+
+.card form legend {
+    padding: 0 0.5rem;
+    color: #173b57;
+    font-weight: 700;
+}
