@@ -35,10 +35,12 @@ const getAllProjects = async () => {
     return result.rows;
 };
 
+
 const getProjectById = async (projectId) => {
     const sql = `
         SELECT
             projects.*,
+            TO_CHAR(projects.project_date, 'YYYY-MM-DD') AS formatted_project_date,
             organizations.name AS organization_name,
             organizations.organization_id
         FROM projects
@@ -50,6 +52,7 @@ const getProjectById = async (projectId) => {
     const result = await pool.query(sql, [projectId]);
     return result.rows[0];
 };
+
 
 const getProjectsByCategoryId = async (categoryId) => {
     const sql = `
