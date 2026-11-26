@@ -1,0 +1,46 @@
+<%- include('partials/header', { title: title }) %>
+
+    <section class="page-heading">
+        <p class="eyebrow">User Account</p>
+        <h1>Create an Account</h1>
+        <p>Register to become a member of Service Network.</p>
+    </section>
+
+    <section class="content-section">
+        <article class="card">
+
+            <form action="/register" method="POST">
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+
+                    <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input type="email" id="email" name="email" maxlength="100" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input type="password" id="password" name="password" minlength="8" autocomplete="new-password"
+                        required>
+
+                    <p>Password must contain at least 8 characters.</p>
+                </div>
+
+                <button type="submit">Register</button>
+
+            </form>
+
+            <p>
+                <a href="/">Back to Home</a>
+            </p>
+
+        </article>
+    </section>
+
+    <%- include('partials/footer') %>

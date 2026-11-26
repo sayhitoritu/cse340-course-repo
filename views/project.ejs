@@ -49,14 +49,22 @@
                                 <% } %>
             </div>
             <p>
-                <a href="/projects/edit/<%= project.project_id %>" class="button">
-                    Edit Project
-                </a>
+
+                <% if (isAdmin) { %>
+                    <a href="/projects/edit/<%= project.project_id %>" class="button">
+                        Edit Project
+                    </a>
+                    <% } %>
+
             </p>
             <p>
-                <a href="/category/project/<%= project.project_id %>/assign-categories">
-                    Assign Categories
-                </a>
+
+                <% if (isAdmin) { %>
+                    <a href="/category/project/<%= project.project_id %>/assign-categories">
+                        Assign Categories
+                    </a>
+                    <% } %>
+
             </p>
         </article>
     </section>

@@ -1,0 +1,42 @@
+<%- include('partials/header', { title: title }) %>
+
+    <section class="page-heading">
+        <p class="eyebrow">User Account</p>
+        <h1>Login</h1>
+        <p>Sign in to your Service Network account.</p>
+    </section>
+
+    <section class="content-section">
+        <article class="card">
+
+            <form action="/login" method="POST">
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
+                </div>
+
+                <button type="submit">Login</button>
+
+            </form>
+
+            <p>
+                Don't have an account?
+                <a href="/register">Register here</a>
+            </p>
+
+            <p>
+                <a href="/">Back to Home</a>
+            </p>
+
+        </article>
+    </section>
+
+    <%- include('partials/footer') %>

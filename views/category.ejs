@@ -10,9 +10,13 @@
         <p>Discover service projects in this category.</p>
 
         <p>
-            <a href="/category/edit-category/<%= category.category_id %>" class="button">
-                Edit Category
-            </a>
+
+            <% if (isAdmin) { %>
+                <a href="/category/edit-category/<%= category.category_id %>" class="button">
+                    Edit Category
+                </a>
+                <% } %>
+
         </p>
     </section>
 

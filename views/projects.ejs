@@ -9,7 +9,11 @@
     <section class="content-section" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Upcoming Service Projects</h2>
         <p>
-            <a href="/projects/new-project">Add a New Service Project</a>
+
+            <% if (isAdmin) { %>
+                <a href="/projects/new-project">Add a New Service Project</a>
+                <% } %>
+
         </p>
 
         <div class="card-grid">

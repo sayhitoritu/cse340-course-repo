@@ -1,0 +1,49 @@
+<%- include('partials/header', { title: title }) %>
+
+    <section class="page-heading">
+        <p class="eyebrow">User Account</p>
+        <h1>Dashboard</h1>
+        <p>Welcome to your Service Network account.</p>
+    </section>
+
+    <section class="content-section">
+        <article class="card">
+
+            <h2>My Profile</h2>
+
+            <p><strong>Name:</strong>
+                <%= name %>
+            </p>
+
+            <p><strong>Email Address:</strong>
+                <%= email %>
+            </p>
+
+            <p><strong>Role:</strong>
+                <%= role || 'Unassigned' %>
+            </p>
+
+            <% if (isAdmin) { %>
+
+                <hr>
+
+                <h2>Administration</h2>
+
+                <p>View registered users and their assigned roles.</p>
+
+                <p>
+                    <a href="/users">View Registered Users</a>
+                </p>
+
+                <% } %>
+
+                    <hr>
+
+                    <p><a href="/">Back to Home</a></p>
+
+                    <p><a href="/logout">Logout</a></p>
+
+        </article>
+    </section>
+
+    <%- include('partials/footer') %>

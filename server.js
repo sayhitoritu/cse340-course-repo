@@ -1,3 +1,5 @@
+
+import usersRoute from "./src/routes/usersRoute.js";
 import flash from "./src/middleware/flash.js";
 import express from "express";
 import path from "path";
@@ -33,6 +35,23 @@ app.use(session({
 // Use flash message middleware
 app.use(flash);
 
+// Make login status available to all views
+
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = Boolean(
+        req.session && req.session.user
+    );
+
+    res.locals.isAdmin =
+        req.session?.user?.role_name === "admin";
+
+    res.locals.NODE_ENV =
+        process.env.NODE_ENV || "development";
+
+    next();
+});
+
+
 // Allow Express to receive and process form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -47,6 +66,9 @@ app.use((req, res, next) => {
     console.log("REQUEST RECEIVED:", req.method, req.url);
     next();
 });
+
+// User registration routes
+app.use("/", usersRoute);
 
 // New organization form routes
 app.use("/", organizationFormsRoute);
@@ -66,6 +88,8 @@ app.use("/category", categoriesRoute);
 // Exact category creation and editing routes
 app.use("/", categoriesRoute);
 
+
+
 // 404 handler
 app.use((req, res, next) => {
     const error = new Error("Page not found");
@@ -75,6 +99,8 @@ app.use((req, res, next) => {
 
 // Global error handler (404 and 500)
 app.use((err, req, res, next) => {
+    console.error("SERVER ERROR:", err);
+
     const status = err.status || err.statusCode || 500;
 
     res.status(status).render("error", {

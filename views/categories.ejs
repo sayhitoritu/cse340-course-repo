@@ -13,9 +13,13 @@
         </p>
 
         <p>
-            <a href="/category/new-category" class="button">
-                Create New Category
-            </a>
+
+            <% if (isAdmin) { %>
+                <a href="/category/new-category" class="button">
+                    Create New Category
+                </a>
+                <% } %>
+
         </p>
     </section>
 

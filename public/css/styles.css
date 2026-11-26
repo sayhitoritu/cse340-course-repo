@@ -320,3 +320,59 @@ textarea:focus-visible {
     color: #173b57;
     font-weight: 700;
 }
+
+
+/* Registered Users Table */
+
+.users-table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 24px 0;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 500px;
+}
+
+.users-table th {
+    background-color: #173950;
+    color: #bfdbfe;
+    padding: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #4b5563;
+}
+
+.users-table td {
+    padding: 16px;
+    border-bottom: 1px solid #374151;
+}
+
+.users-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.user-role {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.role-admin {
+    background-color: #14532d;
+    color: #bbf7d0;
+}
+
+.role-user {
+    background-color: #1e3a5f;
+    color: #bfdbfe;
+}
+
+.users-back-link {
+    margin-top: 24px;
+}

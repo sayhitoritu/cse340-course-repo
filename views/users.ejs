@@ -1,0 +1,64 @@
+<%- include('partials/header', { title: title }) %>
+
+    <section class="page-heading">
+        <p class="eyebrow">Administration</p>
+        <h1>Registered Users</h1>
+        <p>View all registered users and their assigned roles.</p>
+    </section>
+
+    <section class="content-section">
+        <article class="card">
+
+            <h2>Users List</h2>
+
+            <p>Total Registered Users: <strong>
+                    <%= users.length %>
+                </strong></p>
+
+            <% if (users.length> 0) { %>
+
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email Address</th>
+                                <th scope="col">Role</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% users.forEach(user=> { %>
+                                <tr>
+                                    <td>
+                                        <%= user.name %>
+                                    </td>
+                                    <td>
+                                        <%= user.email %>
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="user-role <%= user.role_name === 'admin' ? 'role-admin' : 'role-user' %>">
+                                            <%= user.role_name || 'Unassigned' %>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <% } else { %>
+
+                    <p>No registered users found.</p>
+
+                    <% } %>
+
+                        <p class="users-back-link">
+                            <a href="/dashboard">Back to Dashboard</a>
+                        </p>
+
+        </article>
+    </section>
+
+    <%- include('partials/footer') %>

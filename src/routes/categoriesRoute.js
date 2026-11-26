@@ -13,24 +13,65 @@ import {
     categoryValidation
 } from "../controllers/categoriesController.js";
 
+import {
+    requireLogin,
+    requireRole
+} from "../controllers/users.js";
+
 const router = express.Router();
 
-// Display all categories
+// Display all categories - Public
 router.get("/", buildCategories);
 
-// Create category
-router.get("/new-category", showNewCategoryForm);
-router.post("/new-category", categoryValidation, processNewCategoryForm);
+// Create category - Admin only
+router.get(
+    "/new-category",
+    requireLogin,
+    requireRole("admin"),
+    showNewCategoryForm
+);
 
-// Edit category
-router.get("/edit-category/:id", showEditCategoryForm);
-router.post("/edit-category/:id", categoryValidation, processEditCategoryForm);
+router.post(
+    "/new-category",
+    requireLogin,
+    requireRole("admin"),
+    categoryValidation,
+    processNewCategoryForm
+);
 
-// Assign categories to a project
-router.get("/project/:projectId/assign-categories", showAssignCategoriesForm);
-router.post("/project/:projectId/assign-categories", processAssignCategoriesForm);
+// Edit category - Admin only
+router.get(
+    "/edit-category/:id",
+    requireLogin,
+    requireRole("admin"),
+    showEditCategoryForm
+);
 
-// Display a single category
+router.post(
+    "/edit-category/:id",
+    requireLogin,
+    requireRole("admin"),
+    categoryValidation,
+    processEditCategoryForm
+);
+
+// Assign categories to a project - Admin only
+router.get(
+    "/project/:projectId/assign-categories",
+    requireLogin,
+    requireRole("admin"),
+    showAssignCategoriesForm
+);
+
+router.post(
+    "/project/:projectId/assign-categories",
+    requireLogin,
+    requireRole("admin"),
+    processAssignCategoriesForm
+);
+
+// Display a single category - Public
 router.get("/:id", buildCategoryById);
 
 export default router;
+
